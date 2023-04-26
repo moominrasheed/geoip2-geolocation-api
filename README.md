@@ -30,45 +30,62 @@ asn_db_path = 'GeoLite2-ASN.mmdb'
 python app.py
 ```
 
+## Deployment
+
+The GeoIP2 Geolocation API can be deployed in various ways, depending on your requirements and preferences. Here are a few options:
+
+### Local Development
+
+For local development, you can simply run the Flask application on your local machine using the `python app.py` command as mentioned in the setup section.
+
+### Virtual Environment
+
+You can create a virtual environment for the Flask application and deploy it in a virtual environment. Here's an example:
+
+1. Create and activate a virtual environment:
+
+```bash
+python -m venv myenv
+source myenv/bin/activate  # On Windows: myenv\Scripts\activate
+```
+
+2. Install dependencies inside the virtual environment:
+
+```bash
+pip install flask maxminddb
+```
+
+3. Update the paths to the downloaded databases in the `city_db_path`, `country_db_path`, and `asn_db_path` variables in the `app.py` file.
+
+4. Start the Flask application:
+
+```bash
+python app.py
+```
+
+### Docker
+
+You can also deploy the GeoIP2 Geolocation API in a Docker container. Here's an example:
+
+1. Install Docker on your machine following the [official Docker documentation](https://docs.docker.com/get-docker/).
+
+2. Build a Docker image from the provided Dockerfile:
+
+```bash
+docker build -t geoip2-api .
+```
+
+3. Run a Docker container from the built image:
+
+```bash
+docker run -p 5000:5000 -d geoip2-api
+```
+
+This will run the Flask application inside a Docker container, and you can access it at `http://localhost:5000` in your web browser.
+
 ## API Endpoint
 
-### `/geolocation` [GET]
-
-- Query Parameter:
-  - `ip`: The IP address for which geolocation information is requested.
-
-- Response:
-  - The API returns a JSON response with the following fields:
-    - `as`: The autonomous system organization (ASO) associated with the IP address.
-    - `city`: The city name associated with the IP address.
-    - `country`: The country name associated with the IP address.
-    - `countryCode`: The ISO code of the country associated with the IP address.
-    - `lat`: The latitude associated with the IP address.
-    - `lon`: The longitude associated with the IP address.
-    - `org`: The organization name associated with the IP address.
-    - `query`: The IP address for which geolocation information is requested.
-    - `province`: The province name associated with the IP address.
-    - `status`: The status of the geolocation lookup (e.g., "success").
-    - `timezone`: The timezone associated with the IP address.
-    - `zip`: The postal code associated with the IP address.
-
-```python
-# Example response
-{
-  "as": "Example ASO",
-  "city": "Example City",
-  "country": "Example Country",
-  "countryCode": "EX",
-  "lat": 12.3456,
-  "lon": -78.9012,
-  "org": "Example Organization",
-  "query": "192.168.1.1",
-  "province": "Example Province",
-  "status": "success",
-  "timezone": "America/New_York",
-  "zip": "12345"
-}
-```
+[API endpoint details here]
 
 ## License
 
